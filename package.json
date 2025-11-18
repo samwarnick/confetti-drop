@@ -1,0 +1,26 @@
+{
+  "name": "@samwarnick/confetti-drop",
+  "version": "1.0.0",
+  "description": "[Demo](https://samwarnick.github.io/confetti-drop/demo.html)",
+  "main": "confetti-drop.js",
+  "scripts": {
+    "start": "npx http-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samwarnick/confetti-drop.git"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/samwarnick/confetti-drop/issues"
+  },
+  "author": {
+    "name": "Sam Warnick",
+    "email": "sam@warnick.me",
+    "url": "https://samwarnick.com/"
+  },
+  "homepage": "https://github.com/samwarnick/confetti-drop#readme"
+}

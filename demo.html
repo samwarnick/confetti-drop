@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falling Particles</title>
+  <script type="module" src="confetti-drop.js"></script>
+  <style>
+    :root {
+      --custom-orange: #EA7317;
+      --custom-yellow: #FEC601;
+    }
+
+    html {
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<confetti-drop id="particles"></confetti-drop>
+
+<header>
+  <h1><code>confetti-drop</code></h1>
+</header>
+
+<label for="shapes">Shapes:</label>
+<input type="text" id="shapes" value="square,s,a,m,👨🏻‍💻">
+<label for="colors">Colors:</label>
+<input type="text" id="colors" value="crimson,#3DA5D9,var(--custom-orange),--custom-yellow">
+<label for="spawnRate">Spawn Rate:</label>
+<input type="range" name="spawnRate" id="spawnRate" min="1" max="30" value="8">
+<label for="fallTime">Fall Time:</label>
+<input type="range" name="fallTime" id="fallTime" min="4" max="14" value="5">
+<hr>
+<button onclick="particles.start()">Start</button>
+<button onclick="particles.start(5000)">Start (5s)</button>
+<button onclick="particles.stop()">Stop</button>
+<button onclick="particles.burst()">Burst</button>
+
+<script>
+  const particles = document.getElementById('particles');
+
+  const shapes = document.getElementById('shapes');
+  const colors = document.getElementById('colors');
+  const spawnRate = document.getElementById('spawnRate');
+  const fallTime = document.getElementById('fallTime');
+
+  particles.setAttribute('shapes', shapes.value);
+  particles.setAttribute('colors', colors.value);
+  particles.setAttribute('spawn-rate', spawnRate.value);
+  particles.setAttribute('fall-time', fallTime.value);
+
+  shapes.addEventListener('input', () => particles.setAttribute('shapes', shapes.value));
+  colors.addEventListener('input', () => particles.setAttribute('colors', colors.value));
+  spawnRate.addEventListener('input', () => particles.setAttribute('spawn-rate', spawnRate.value));
+  fallTime.addEventListener('input', () => particles.setAttribute('fall-time', fallTime.value));
+</script>
+</body>
+</html>
