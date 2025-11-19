@@ -1,6 +1,6 @@
 {
   "name": "@samwarnick/confetti-drop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "[Demo](https://samwarnick.github.io/confetti-drop/demo.html)",
   "main": "confetti-drop.js",
   "scripts": {

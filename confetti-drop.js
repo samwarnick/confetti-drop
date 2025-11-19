@@ -7,7 +7,7 @@ class ConfettiDrop extends HTMLElement {
     defaultDuration: "default-duration",
     fallTime: "fall-time",
     shapes: "shapes",
-		spawnRate: "spawn-rate",
+    spawnRate: "spawn-rate",
   };
 
   static observedAttributes = [
@@ -16,7 +16,7 @@ class ConfettiDrop extends HTMLElement {
     ConfettiDrop.attrs.fallTime,
     ConfettiDrop.attrs.defaultDuration,
     ConfettiDrop.attrs.shapes,
-		ConfettiDrop.attrs.spawnRate,
+    ConfettiDrop.attrs.spawnRate,
   ];
 
   // language=CSS
@@ -120,9 +120,9 @@ class ConfettiDrop extends HTMLElement {
       Number(this.getAttribute(ConfettiDrop.attrs.fallTime)) || 5;
     this.#spawnRate =
       Number(this.getAttribute(ConfettiDrop.attrs.spawnRate)) || 8;
-    this.#shapes = this.getAttribute(ConfettiDrop.attrs.shapes)?.split(
-      ",",
-    ) || ["square"];
+    this.#shapes = this.getAttribute(ConfettiDrop.attrs.shapes)?.split(",") || [
+      "square",
+    ];
     this.#colors = this.getAttribute(ConfettiDrop.attrs.colors)
       ?.split(",")
       .map((c) => {
@@ -168,7 +168,7 @@ class ConfettiDrop extends HTMLElement {
         });
       },
       {
-        root: null,
+        root: this.#particlesContainer,
         rootMargin: "100px",
       },
     );
@@ -391,7 +391,7 @@ class ConfettiDrop extends HTMLElement {
         this.#shouldResume = false;
       }
     } else if (document.visibilityState === "hidden") {
-      this.#shouldResume = !!this.rid;
+      this.#shouldResume = this.isRunning;
       this.stop();
     }
   }

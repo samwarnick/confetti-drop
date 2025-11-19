@@ -53,3 +53,5 @@ npm install @samwarnick/confetti-drop
 
 - `v1.0.0`
   - Initial release
+- `v1.0.1`
+  - Particles were being destroyed too quickly when used in a smaller container.
