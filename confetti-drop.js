@@ -94,6 +94,7 @@ class ConfettiDrop extends HTMLElement {
   #outstandingParticles = 0;
 
   #inBurstMode = false;
+	#shouldStopAfterBurst = false;
   #burstTimeout;
   #rid;
   #lastUpdated;
@@ -234,19 +235,20 @@ class ConfettiDrop extends HTMLElement {
   }
 
   burst() {
-    const shouldStartAndStop = !this.isRunning;
-    if (shouldStartAndStop) {
-      this.start();
-    }
+		if (!this.isRunning) {
+			this.start();
+			this.#shouldStopAfterBurst = true;
+		}
     this.#inBurstMode = true;
     if (this.#burstTimeout) {
       clearTimeout(this.#burstTimeout);
     }
     this.#burstTimeout = setTimeout(() => {
       this.#inBurstMode = false;
-      if (shouldStartAndStop) {
+      if (this.#shouldStopAfterBurst) {
         this.stop();
       }
+			this.#burstTimeout = null;
     }, 200);
   }
 
