@@ -55,3 +55,8 @@ npm install @samwarnick/confetti-drop
   - Initial release
 - `v1.0.1`
   - Particles were being destroyed too quickly when used in a smaller container.
+- `v1.1.0`
+  - Use container size to correctly position particles.
+    - Will now correctly cover entire container and not just 100vh.
+  - Fall time is now a consistent time to move 1000px and not 100vh. So partcles will not be faster or slower depending on container height.
+  - Fixed a bug where spamming `burst()` would unexpectedly get component stuck running.
