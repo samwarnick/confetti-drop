@@ -26,7 +26,7 @@ class ConfettiDrop extends HTMLElement {
           position: absolute;
           inset: 0;
           pointer-events: none;
-					overflow: hidden;
+          overflow: hidden;
       }
 
       .particles {
@@ -34,7 +34,7 @@ class ConfettiDrop extends HTMLElement {
           width: 100%;
           height: 100%;
           perspective: 500px;
-					container-type: size;
+          container-type: size;
       }
 
       .particle {
@@ -44,9 +44,9 @@ class ConfettiDrop extends HTMLElement {
           width: var(--_particle-size);
           translate: var(--_translate-x) -50px 0;
           rotate: var(--_full-rotation);
-          animation: 
-									rotate calc(var(--_rotation-speed) * 1s) linear infinite,
-          				translate calc(var(--_fall-time) * 1s) cubic-bezier(0, 0.19, 0.3, 0.45);
+          animation:
+                  rotate calc(var(--_rotation-speed) * 1s) linear infinite,
+                  translate calc(var(--_fall-time) * 1s) cubic-bezier(0, 0.19, 0.3, 0.45);
           position: absolute;
           color: var(--_color);
           font-size: calc(var(--_particle-size) + 10px);
@@ -104,7 +104,7 @@ class ConfettiDrop extends HTMLElement {
   #shouldResume = false;
 
   get isRunning() {
-    return !!this.#rid;
+    return this.#rid !== null && this.#rid !== undefined;
   }
 
   connectedCallback() {
@@ -251,6 +251,10 @@ class ConfettiDrop extends HTMLElement {
   }
 
   #createParticles() {
+    if (!this.isRunning) {
+      return;
+    }
+
     const currentTime = performance.now();
     const delta = currentTime - this.#lastUpdated;
 
@@ -287,9 +291,19 @@ class ConfettiDrop extends HTMLElement {
     this.#rid = requestAnimationFrame(this.#boundCreateParticles);
   }
 
+  #calculateFallTime(baseFallTime) {
+    const containerHeight = this.#particlesContainer.offsetHeight;
+    const baseHeight = 1000;
+    return (containerHeight / baseHeight) * baseFallTime;
+  }
+
   #createParticle(burst) {
     const x = burst ? randomBetween(40, 60) : randomBetween(0, 100);
     const spawnTime = performance.now();
+    const baseFallTime = burst
+      ? randomBetween(2, 4)
+      : randomBetween(this.#fallTime - 2, this.#fallTime);
+
     return {
       type: this.#getRandomShape(),
       id: generateId(spawnTime),
@@ -299,9 +313,7 @@ class ConfettiDrop extends HTMLElement {
       rotZ: randomBetween(0, 1),
       rotDeg: randomBetween(0, 360),
       rotSpeed: randomBetween(1, 3),
-      fallTime: burst
-        ? randomBetween(2, 4)
-        : randomBetween(this.#fallTime - 2, this.#fallTime),
+      fallTime: this.#calculateFallTime(baseFallTime),
       x,
       xDrift: burst ? (x - 50) * 2 : randomBetween(-5, 5),
       color: this.#getRandomColor(),

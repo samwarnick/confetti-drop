@@ -28,7 +28,7 @@ npm install @samwarnick/confetti-drop
 - `default-duration` default: `null`
     - How many seconds particles will be generated for. Generation will be stopped after this time. Leave as `null` to generate particles forever.
 - `fall-time` default: `5`
-    - How many seconds it takes a particle to reach the bottom. Higher is slower.
+    - How many seconds it takes a particle to move 1000px. Higher is slower.
 - `shapes` default: `"square"`
   - Comma separated list. Each particle will be assigned a random shape from this list. 
   - Available shapes: `square`, characters, or emoji.
