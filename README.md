@@ -49,6 +49,12 @@ npm install @samwarnick/confetti-drop
 
 `confetti-drop` will not respect `autostart` if reduced motion is enabled. Other than that, it is up to you to handle reduced motion yourself and avoid calling `start()`.
 
+Internally, `confetti-drop` uses the [`window.matchMedia` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) to check for this preference. You can check the user's preference easily with the following code:
+
+```js
+window.matchMedia(`(prefers-reduced-motion: reduce)`).matches // returns `true` or `false`
+```
+
 ## Changelog
 
 - `v1.0.0`
